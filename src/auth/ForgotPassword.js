@@ -1,9 +1,9 @@
 import React from 'react';
 export default function RequestPassChange({handleChange,state,handleRequestPassChange}) {
   return (
-    <div>
+    <div data-testid="requestchangepassform">
       <input name="email" value={state.email} onChange={handleChange} type="email" data-testid="email" />
-      <button onClick={handleRequestPassChange} data-testid="request">Request password Change</button>
+      <button type="button" onClick={handleRequestPassChange} data-testid="requestpasschange-btn">Request password Change</button>
     </div>
   );
 }

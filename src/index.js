@@ -1,23 +1,21 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import RequestPassChange from './auth/RequestPassChange';
-import AuthProvider from './auth/AuthProvider';
+import Authentication from './auth/Authentication';
+import { BrowserRouter, Link } from 'react-router-dom';
+
 ReactDOM.render(
-  <AuthProvider>
-    {({
-      handleChange,
-      handleRequestPassChange,
-      state
-    }) => {
-      return (
-        <RequestPassChange
-          state={state}
-          handleChange={handleChange}
-          handleRequestPassChange={handleRequestPassChange}
-        />
-      );
-    }}
-  </AuthProvider>,
+  <BrowserRouter>
+    <div>
+      <Link to="/login">Login</Link>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Authentication>
+          {({ authState }) => {
+            return <div>Inside Auth</div>;
+          }}
+        </Authentication>
+      </Suspense>
+    </div>
+  </BrowserRouter>,
 
   document.getElementById('root')
 );

@@ -1,14 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 export default function Login({ handleLogin, handleChange, state }) {
-  useEffect(() => {
-    if (state.email === null) {
-      debugger;
-    }
-  }, [state]);
-
   return (
-    <div>
+    <div data-testid="loginform">
       Login
       <input
         onChange={handleChange}
@@ -26,7 +20,7 @@ export default function Login({ handleLogin, handleChange, state }) {
         placeholder="enter password"
         data-testid="password"
       />
-      <button data-testid="login" onClick={handleLogin}>
+      <button type="button" data-testid="login-btn" onClick={handleLogin}>
         Login
       </button>
     </div>

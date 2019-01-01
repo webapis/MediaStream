@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import Login from './Login';
-import ChangePassword from './ChangePassword';
-import RequestPassChange from './RequestPassChange';
-import Signup from './Signup';
+import React from 'react';
 import useAuth from './useAuth';
-export default function Authentication() {
-  const [route, setRoute] = useState('login');
+import { Route, Switch } from 'react-router-dom';
+const Login = React.lazy(() => import('./Login'));
+const ChangePassword = React.lazy(() => import('./ChangePassword'));
+const ForgotPassword = React.lazy(() => import('./ForgotPassword'));
+const Signup = React.lazy(() => import('./Signup'));
+export default function Authentication({ children }) {
   const {
     handleChange,
     handleChangePass,
@@ -14,44 +14,39 @@ export default function Authentication() {
     handleSignup,
     state
   } = useAuth();
-  function changeRoute(route) {
-    setRoute(route);
-  }
-
   return (
     <div>
-      {route === 'login' && (
-        <Login
-          login={handleLogin}
-          onChange={handleChange}
-          state={state}
-          changeRoute={changeRoute}
-        />
-      )}
-      {route === 'signup' && (
-        <Signup
-          signup={handleSignup}
-          onChange={handleChange}
-          state={state}
-          changeRoute={changeRoute}
-        />
-      )}
-      {route === 'chagepass' && (
-        <ChangePassword
-          changePass={handleChangePass}
-          onChange={handleChange}
-          state={state}
-          changeRoute={changeRoute}
-        />
-      )}
-      {route === 'requestpasschange' && (
-        <RequestPassChange
-          requestPassChange={handleRequestPassChange}
-          onChange={handleChange}
-          state={state}
-          changeRoute={changeRoute}
-        />
-      )}
+      <Switch>
+        <Route path="/login">
+          <Login
+            handleLogin={handleLogin}
+            handleChange={handleChange}
+            state={state}
+          />
+        </Route>
+        <Route path="/signup">
+          <Signup
+            signup={handleSignup}
+            handleChange={handleChange}
+            state={state}
+          />
+        </Route>
+        <Route path="/changepassword">
+          <ChangePassword
+            changePass={handleChangePass}
+            handleChange={handleChange}
+            state={state}
+          />
+        </Route>
+        <Route path="/requestpasschange">
+          <ForgotPassword
+            requestPassChange={handleRequestPassChange}
+            handleChange={handleChange}
+            state={state}
+          />
+        </Route>
+      </Switch>
+      {children({ authState: state })}
     </div>
   );
 }

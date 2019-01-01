@@ -20,15 +20,15 @@ describe('ChangePassword', () => {
     );
   });
   it('ui controls are visible', () => {
-    expect(screen.getByTestId(/password/i)).toBeVisible();
-    expect(screen.getByTestId(/confirm/i)).toBeVisible();
-    expect(screen.getByTestId(/change/i)).toBeVisible();
+    expect(screen.getByTestId('password')).toBeVisible();
+    expect(screen.getByTestId('confirm')).toBeVisible();
+    expect(screen.getByTestId('change-pass-btn')).toBeVisible();
   });
   it('enter password', () => {
-    fireEvent.change(screen.getByTestId(/password/i), {
+    fireEvent.change(screen.getByTestId('password'), {
       target: { value: '123' }
     });
-    expect(screen.getByTestId(/password/i).value).toEqual('123');
+    expect(screen.getByTestId('password').value).toEqual('123');
   });
   it('enter confirm', () => {
     fireEvent.change(screen.getByTestId(/confirm/i), {
@@ -38,7 +38,7 @@ describe('ChangePassword', () => {
   });
   it('click change btn', () => {
     wait(() => {
-      fireEvent.click(screen.getByTestId(/change/i));
+      fireEvent.click(screen.getByTestId('change-pass-btn'));
     });
   });
 });

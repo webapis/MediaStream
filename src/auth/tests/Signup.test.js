@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { screen, render, fireEvent } from '@testing-library/react';
+import { screen, render, fireEvent, wait } from '@testing-library/react';
 import Signup from '../Signup';
 import AuthProvider from '../AuthProvider';
 describe('Signup', () => {
@@ -24,7 +24,7 @@ describe('Signup', () => {
     expect(screen.getByTestId(/username/i)).toBeVisible();
     expect(screen.getByTestId(/email/i)).toBeVisible();
     expect(screen.getByTestId(/password/i)).toBeVisible();
-    expect(screen.getByTestId(/signup/i)).toBeVisible();
+    expect(screen.getByTestId('signup-btn')).toBeVisible();
   });
 
   it('username entered', () => {
@@ -46,6 +46,9 @@ describe('Signup', () => {
     expect(screen.getByTestId(/password/i).value).toEqual('123');
   });
   it('signup clicked', () => {
-    fireEvent.click(screen.getByTestId(/signup/i));
+    wait(()=>{
+      fireEvent.click(screen.getByTestId('signup-btn'));
+    })
+  
   });
 });

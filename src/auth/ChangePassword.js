@@ -6,7 +6,7 @@ export default function ChangePassword({
   handleChangePass
 }) {
   return (
-    <div>
+    <div  data-testid="changepassform">
       <input
         value={state.password}
         type="password"
@@ -21,7 +21,7 @@ export default function ChangePassword({
         name="confirm"
         onChange={handleChange}
       />
-      <button data-testid="change" onClick={handleChangePass}>
+      <button type="button" data-testid="change-pass-btn" onClick={handleChangePass}>
         Change
       </button>
     </div>

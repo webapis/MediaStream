@@ -29,7 +29,7 @@ describe('Login', () => {
   it('ui controls are visible', () => {
     expect(screen.queryByTestId(/email/i)).toBeVisible();
     expect(screen.queryByTestId(/password/i)).toBeVisible();
-    expect(screen.queryByTestId(/login/i)).toBeVisible();
+    expect(screen.queryByTestId('login-btn')).toBeVisible();
   });
 
   describe('user enters email and password', () => {
@@ -52,7 +52,7 @@ describe('Login', () => {
 
     it('user clicked login button', () => {
       wait(() => {
-        fireEvent.click(screen.getByTestId(/login/i));
+        fireEvent.click(screen.getByTestId('login-btn'));
       });
     });
   });

@@ -1,15 +1,15 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { screen, render, fireEvent } from '@testing-library/react';
-import RequestPasswordChange from '../RequestPassChange';
+import { screen, render, fireEvent, wait } from '@testing-library/react';
+import ForgotPassword from '../ForgotPassword';
 import AuthProvider from '../AuthProvider';
-describe('RequestPassChange', () => {
+describe('ForgotPassword', () => {
   beforeEach(() => {
     render(
       <AuthProvider>
         {({ state, handleChange, handleRequestPassChange }) => {
           return (
-            <RequestPasswordChange
+            <ForgotPassword
               state={state}
               handleChange={handleChange}
               handleRequestPassChange={handleRequestPassChange}
@@ -20,9 +20,8 @@ describe('RequestPassChange', () => {
     );
   });
   it('ui controls visible', () => {
- 
-    expect(screen.getByTestId(/email/i)).toBeVisible();
-    expect(screen.getByTestId(/request/i)).toBeVisible();
+    expect(screen.getByTestId('email')).toBeVisible();
+    expect(screen.getByTestId('requestpasschange-btn')).toBeVisible();
   });
 
   it('enter email', () => {
@@ -30,6 +29,10 @@ describe('RequestPassChange', () => {
       target: { value: 'test@gmail.com' }
     });
     expect(screen.getByTestId(/email/i).value).toEqual('test@gmail.com');
-  })
-  
+  });
+  it('click requestchange btn', () => {
+    wait(() => {
+      fireEvent.click(screen.getByTestId(/requestpasschange/i));
+    });
+  });
 });
