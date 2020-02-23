@@ -7,7 +7,7 @@ export default function MediaSteamTab({ mediaStream,id,active,readyState }) {
   return (
     <div>
       <Tabs>
-        <Tab title="MediaStream Props" selectTab={selectTab} index={0} />
+        <Tab selectedTab={index} title="MediaStream Props" selectTab={selectTab} index={0} />
       </Tabs>
       <div>{index === 0 && <MediaStreamProps mediaStream={mediaStream} id={id}active={active} readyState={readyState}/>}</div>
     </div>

@@ -9,14 +9,14 @@ export default function useMediaStream({
   const [id, setId] = useState(null);
   const [starting, setStarting] = useState(false);
   const [mediaError, setMediaError] = useState(null);
-
-  function getBrowserCapability(){
-
+  const [supportedConstraints, setSupportedConstraints] = useState(null);
+  function getSupportedConstraints() {
+    setSupportedConstraints(navigator.mediaDevices.getSupportedConstraints());
   }
 
   useEffect(() => {
     if (autoPlay && constraints && !mediaStream) {
-      setStarting(true)
+      setStarting(true);
       getUserMedia(constraints);
     }
   }, [autoPlay, mediaStream, constraints]);
@@ -51,6 +51,7 @@ export default function useMediaStream({
     active,
     readyState,
     id,
-    getBrowserCapability
+    getSupportedConstraints,
+    supportedConstraints
   };
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useTabs, { Tab, Tabs } from './Tabs';
 import TrackTab from './TrackTab';
 import MediaStreamTab from './MediaStreamTab';
@@ -15,7 +15,8 @@ export default function MainTab() {
     active,
     readyState,
     id,
-    getBrowserCapability
+    getSupportedConstraints,
+    supportedConstraints
   } = useMediaStream({
     autoPlay: false,
     constraints: { video: true, audio: true }
@@ -29,6 +30,9 @@ export default function MainTab() {
     videoTracks
   } = useMediaStreamTrack({ mediaStream });
 
+  useEffect(()=>{
+      getSupportedConstraints()
+  },[])
   function handleSelectTab({ ind, type }) {
     if (type === 'mediaStream') {
       debugger;
@@ -38,7 +42,7 @@ export default function MainTab() {
     if (mediaStream) {
       if (type === 'browser') {
         selectTab(ind);
-        getBrowserCapability();
+        getSupportedConstraints();
       }
 
       if (type === 'audio') {
@@ -73,7 +77,7 @@ export default function MainTab() {
           index={1}
         />
         <Tab
-        starting={starting}
+          starting={starting}
           disabled={!mediaStream}
           selectedTab={index}
           title="MediaStreamTrack (Video)"
@@ -89,7 +93,9 @@ export default function MainTab() {
         />
       </Tabs>
       <div>
-        {index === 0 && <BrowserCapability />}
+        {index === 0 && (
+          <BrowserCapability supportedConstraints={supportedConstraints} />
+        )}
         {index === 1 && (
           <MediaStreamTab
             active={active}
