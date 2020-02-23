@@ -5,6 +5,7 @@ import MediaStreamTab from './MediaStreamTab';
 import useMediaStream from './useMediaStream';
 import useMediaStreamTrack from './track/useMediaStreamTrack';
 import BrowserCapability from './BrowserCapability';
+import SetVideoTrackConstraints from './SetVideoTrackConstraints';
 export default function MainTab() {
   const { index, selectTab } = useTabs();
   const {
@@ -27,15 +28,15 @@ export default function MainTab() {
     getVideoTracks,
     tracks,
     audioTracks,
-    videoTracks
+    videoTracks,
+    applyConstraints
   } = useMediaStreamTrack({ mediaStream });
 
-  useEffect(()=>{
-      getSupportedConstraints()
-  },[])
+  useEffect(() => {
+    getSupportedConstraints();
+  }, []);
   function handleSelectTab({ ind, type }) {
     if (type === 'mediaStream') {
-      debugger;
       selectTab(ind);
       getUserMedia();
     }
@@ -46,14 +47,12 @@ export default function MainTab() {
       }
 
       if (type === 'audio') {
-        debugger;
         selectTab(ind);
         if (audioTracks.length === 0) {
           getAudioTracks();
         }
       }
       if (type === 'video') {
-        debugger;
         selectTab(ind);
         if (videoTracks.length === 0) {
           getVideoTracks();
@@ -104,7 +103,14 @@ export default function MainTab() {
             mediaStream={mediaStream}
           />
         )}
-        {index === 2 && <TrackTab track={videoTracks[0]} />}
+        {index === 2 && (
+          <TrackTab
+            mediaStream={mediaStream}
+            track={videoTracks[0]}
+            
+            SetConstraints={SetVideoTrackConstraints}
+          />
+        )}
         {index === 3 && <TrackTab track={audioTracks[0]} />}
       </div>
     </div>

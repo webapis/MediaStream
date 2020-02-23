@@ -3,7 +3,7 @@ import useTabs, { Tab, Tabs } from './Tabs';
 import PropsView from './PropsView';
 import TrackProps from './track/TrackProps';
 import useTrackCapabilities from './track/useTrackCapabilities';
-export default function TrackTab({ track }) {
+export default function TrackTab({ track, SetConstraints, mediaStream }) {
   const { index, selectTab } = useTabs();
   const {
     capabilities,
@@ -11,7 +11,8 @@ export default function TrackTab({ track }) {
     constrains,
     getCapabilities,
     getSettings,
-    getConstraints
+    getConstraints,
+    applyConstraints
   } = useTrackCapabilities({ track });
 
   function handleSelectTab(ind) {
@@ -22,11 +23,11 @@ export default function TrackTab({ track }) {
       selectTab(0);
     }
   }
-useEffect(()=>{
+  useEffect(() => {
     getCapabilities();
     getSettings();
     getConstraints();
-},[])
+  }, []);
   return (
     <div>
       <Tabs>
@@ -42,6 +43,12 @@ useEffect(()=>{
           selectTab={selectTab}
           title="Track Props"
         />
+        <Tab
+          selectedTab={index}
+          index={2}
+          selectTab={selectTab}
+          title="setConstraints"
+        />
       </Tabs>
       <div>
         {index === 0 && (
@@ -52,6 +59,12 @@ useEffect(()=>{
           />
         )}
         {index === 1 && <TrackProps track={track} />}
+        {index === 2 && (
+          <SetConstraints
+            mediaStream={mediaStream}
+            applyConstraints={applyConstraints}
+          />
+        )}
       </div>
     </div>
   );

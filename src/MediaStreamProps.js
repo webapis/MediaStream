@@ -10,7 +10,7 @@ function Prop({ title, value }) {
   return (
     <div style={style.root}>
       <div>title:</div>
-      <div>{value&& value.toString()}</div>
+      <div>{value && value.toString()}</div>
     </div>
   );
 }
