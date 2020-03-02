@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MainTab from './MainTab'
-
 ReactDOM.render(
-  <MainTab/>
+  <div>
+   
+    <MainTab/>
+  </div>
+ 
   ,
   document.getElementById('root')
 );

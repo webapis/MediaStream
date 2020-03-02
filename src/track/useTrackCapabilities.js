@@ -15,10 +15,10 @@ export default function useTrackCapabilities({ track }) {
   }
 
   function applyConstraints(constr) {
-    debugger
+  
     track.applyConstraints(constr).then(() => {
       getSettings();
-      debugger;
+     
     });
   }
 

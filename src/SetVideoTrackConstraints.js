@@ -11,7 +11,7 @@ export default function SetVideoTrackConstraints({ mediaStream,applyConstraints 
   }, [mediaStream]);
 
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: 'flex',position:'relative' }}>
       <video ref={videoRef} autoPlay={true}></video>
       <RecommendedVideoConstraints applyConstraints={applyConstraints}/>
     </div>
