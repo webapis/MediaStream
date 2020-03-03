@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 export default function useMediaStream({
   autoPlay = false,
@@ -32,9 +33,7 @@ export default function useMediaStream({
     try {
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       /* use the stream */
-      stream.onaddtrack = () => {
-        debugger;
-      };
+
       setMediaStream(stream);
       setStarting(false);
     } catch (err) {
