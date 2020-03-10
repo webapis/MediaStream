@@ -1,5 +1,7 @@
 .nav-root {
-  background-color: #546e7a;
+  border: 1px solid white;
+  background-color: #37474f;
+  border-radius: 5px;
   height: 70px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -56,11 +58,22 @@
   background-color: #37474f;
   padding: 5px;
   color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .nav-item-cont {
   border: 1px solid white;
   border-radius: 5px;
   margin: 5px;
+}
+
+.nav-border {
+  padding: 5px;
+  background-color: #546e7a;
 }
 /*# sourceMappingURL=style.css.map */

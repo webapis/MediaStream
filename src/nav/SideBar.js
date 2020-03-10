@@ -12,6 +12,7 @@ export default function SideBar() {
       <SideNav selectedNav={selectedNav} id={0} openNav={openNav} />
       <SideNav selectedNav={selectedNav} id={1} openNav={openNav} />
       <SideNav selectedNav={selectedNav} id={2} openNav={openNav} />
+      <SideNav selectedNav={selectedNav} id={3} openNav={openNav} />
     </div>
   );
 }
