@@ -1,16 +1,16 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import Authentication from './auth/Authentication';
-import { BrowserRouter, Link } from 'react-router-dom';
-
+import { BrowserRouter } from 'react-router-dom';
+import Navigation from './nav/Navigation';
+import SideBar from './nav/SideBar';
 ReactDOM.render(
   <BrowserRouter>
     <div>
-      <Link to="/login">Login</Link>
       <Suspense fallback={<div>Loading...</div>}>
-        <Authentication>
+        <Authentication sidebar={<SideBar/>}>
           {({ authState }) => {
-            return <div>Inside Auth</div>;
+            return <Navigation />;
           }}
         </Authentication>
       </Suspense>
